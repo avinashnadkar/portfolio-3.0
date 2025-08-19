@@ -133,7 +133,7 @@ if (experienceSection) {
                 experienceObserver.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.5 });
+    }, { threshold: 0.2, rootMargin: '0px 0px -100px 0px' });
     
     experienceObserver.observe(experienceSection);
 }
@@ -352,10 +352,11 @@ function highlightActiveNav() {
     let current = '';
     
     sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        
-        if (window.pageYOffset >= sectionTop - 200) {
+        const rect = section.getBoundingClientRect();
+        const sectionCenter = rect.top + rect.height / 2;
+        const viewportCenter = window.innerHeight / 2;
+        // Consider the section active if its center is near the viewport center
+        if (Math.abs(sectionCenter - viewportCenter) < rect.height / 2) {
             current = section.getAttribute('id');
         }
     });

@@ -559,6 +559,7 @@ section {
 /* Contact Section */
 .contact {
     background: white;
+    min-height: 80vh;
 }
 
 .contact-content {
@@ -681,6 +682,12 @@ section {
     .timeline-content {
         width: calc(100% - 60px);
         left: 60px !important;
+    }
+
+    /* Ensure timeline content is visible on mobile even if JS observer doesn't trigger */
+    .timeline-item {
+        opacity: 1 !important;
+        transform: none !important;
     }
 
     .about-stats {
